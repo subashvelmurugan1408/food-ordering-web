@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Edit Food</title>
+
+</head>
+
+<body>
+
+<h2>Edit Food</h2>
+
+<form method="POST">
+
+<input
+type="text"
+name="food_name"
+value="{{ food.food_name }}">
+
+<br><br>
+
+<input
+type="number"
+name="price"
+value="{{ food.price }}">
+
+<br><br>
+
+<input
+type="text"
+name="image"
+value="{{ food.image }}">
+
+<br><br>
+
+<button>
+
+Update
+
+</button>
+
+</form>
+
+</body>
+
+</html>

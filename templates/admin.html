@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Admin Panel</title>
+
+</head>
+
+<body>
+
+<h1>Admin Panel</h1>
+
+<a href="/add_food">
+
+<button>Add New Food</button>
+
+</a>
+
+<br><br>
+
+<table border="1" cellpadding="10">
+
+<tr>
+
+<th>ID</th>
+
+<th>Food</th>
+
+<th>Price</th>
+
+<th>Image</th>
+
+<th>Action</th>
+
+</tr>
+
+{% for food in foods %}
+
+<tr>
+
+<td>{{ food.id }}</td>
+
+<td>{{ food.food_name }}</td>
+
+<td>{{ food.price }}</td>
+
+<td>{{ food.image }}</td>
+
+<td>
+
+<a href="/edit_food/{{ food.id }}">
+
+Edit
+
+</a>
+
+|
+
+<a href="/delete_food/{{ food.id }}">
+
+Delete
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+
+</html>

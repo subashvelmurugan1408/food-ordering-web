@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Delivery</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="">
+            <h2>FoodExpress</h2>
+        </div>
+        
+      <nav>
+
+    <a href="/">Home</a>
+    <a href="/cart">Cart</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+
+    {% if session.get("user_name") %}
+
+        <a href="/dashboard">Dashboard</a>
+        <a href="/logout">Logout</a>
+
+    {% else %}
+
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+
+    {% endif %}
+
+</nav>
+<form action="/search" method="GET">
+    <input type="text" name="search" placeholder="Search food...">
+    <button type="submit">Search</button>
+</form>
+    </header>
+
+    <!-- Hero Section -->
+
+    <section class="hero">
+
+        <h1>Delicious Food Delivered To Your Door</h1>
+
+        <p>Fresh • Fast • Affordable</p>
+
+        <button>Order Now</button>
+
+    </section>
+
+    <!-- Featured Foods -->
+
+    <section>
+
+        <h2 class="title">Popular Foods</h2>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <img src="{{ url_for('static', filename='images/burger.jpg') }}">
+
+                <h3>Burger</h3>
+
+                <p>₹120</p>
+                <a href="/add_to_cart/1">
+                    <button>Add to Cart</button>
+                </a>
+
+                
+
+            </div>
+
+            <div class="card">
+
+                <img src="{{ url_for('static', filename='images/pizza.jpg') }}">
+
+                <h3>Pizza</h3>
+
+                <p>₹250</p>
+                <a href="/add_to_cart/2">
+                    <button>Add to Cart</button>
+                </a>
+
+                
+
+            </div>
+
+            <div class="card">
+
+                <img src="{{ url_for('static', filename='images/biryani.jpg') }}">
+
+                <h3>Chicken Biryani</h3>
+
+                <p>₹180</p>
+                <a href="/add_to_cart/3">
+                    <button>Add to Cart</button>
+                </a>
+
+                
+
+            </div>
+             <div class="card">
+
+                <img src="{{ url_for('static', filename='images/fries.jpg') }}">
+
+                <h3> french fries</h3>
+
+                <p>₹180</p>
+                <a href="/add_to_cart/4">
+                    <button>Add to Cart</button>
+                </a>
+
+
+            </div>
+             <div class="card">
+
+                <img src="{{ url_for('static', filename='images/pasta.jpg') }}">
+
+                <h3>pasta</h3>
+
+                <p>₹180</p>
+                <a href="/add_to_cart/5">
+                    <button>Add to Cart</button>
+                </a>
+
+            </div>
+             <div class="card">
+
+                <img src="{{ url_for('static', filename='images/sandwich.jpg') }}">
+
+                <h3>Sandwich</h3>
+
+                <p>₹180</p>
+
+                <a href="/add_to_cart/6">
+                    <button>Add to Cart</button>
+                </a>
+
+            </div>
+            <div class="card">
+
+                <img src="{{ url_for('static', filename='images/chickenroll.jpg') }}">
+
+                <h3>Chicken Roll</h3>
+
+                <p>₹180</p>
+
+                <a href="/add_to_cart/7">
+                    <button>Add to Cart</button>
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    </div>
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>© 2026 FoodExpress. All Rights Reserved.</p>
+
+    </footer>
+
+</body>
+
+</html>

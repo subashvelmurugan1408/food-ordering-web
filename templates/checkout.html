@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+</head>
+
+<body>
+
+<h1>Checkout</h1>
+
+<form action="/checkout" method="POST">
+
+    <input type="text"
+           name="customer_name"
+           placeholder="Customer Name"
+           required><br><br>
+
+    <input type="text"
+           name="phone"
+           placeholder="Phone Number"
+           required><br><br>
+
+    <textarea
+        name="address"
+        placeholder="Delivery Address"
+        required>
+    </textarea><br><br>
+
+    <button type="submit">
+
+        Place Order
+
+    </button>
+
+</form>
+
+</body>
+</html>
