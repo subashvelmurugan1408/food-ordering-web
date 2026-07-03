@@ -149,6 +149,11 @@ def remove(index):
         session["cart"] = cart
 
     return redirect("/cart")
+#clear cart route
+@app.route("/clear_cart")
+def clear_cart():
+    session.pop("cart", None)
+    return "Cart Cleared!"
 #chekout route
 @app.route("/checkout", methods=["GET", "POST"])
 def checkout():
