@@ -1,16 +1,18 @@
 from flask import Flask, render_template, request ,redirect, url_for, session
 import mysql.connector
+import os
+
 
 app = Flask(__name__)
-app.secret_key = "fooddelivery123" # Change this to a random secret key
+app.secret_key = os.environ.get("SECRET_KEY")# Change this to a random secret key
 
 
 db = mysql.connector.connect(
-    host="food-delivery-db.c9uaosqimkdi.eu-north-1.rds.amazonaws.com",
-    user="subash",
-    password="14202006",
-    database="food_delivery",
-    port=3306
+    host=os.getenv("DB_HOST"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME"),
+    port=int(os.getenv("DB_PORT", 3306))
 )
 
 cursor = db.cursor(dictionary=True)
