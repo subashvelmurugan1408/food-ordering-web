@@ -8,6 +8,7 @@
 
     <link rel="stylesheet"
         href="{{ url_for('static', filename='style.css') }}">
+ <script src="{{ url_for('static', filename='js/search.js') }}"></script>
 </head>
 
 <body>
@@ -40,10 +41,7 @@
     {% endif %}
 
 </nav>
-<form action="/search" method="GET">
-    <input type="text" name="search" placeholder="Search food...">
-    <button type="submit">Search</button>
-</form>
+
     </header>
 
     <!-- Hero Section -->
@@ -53,8 +51,26 @@
         <h1>Delicious Food Delivered To Your Door</h1>
 
         <p>Fresh • Fast • Affordable</p>
+        <div class="hero-search">
 
-        <button>Order Now</button>
+    <form action="/search" method="GET">
+
+        <input
+            type="text"
+             id="searchBox"
+            name="search"
+            placeholder="🍔 Search your favourite food..."
+        >
+
+        <button type="submit">
+
+            🔍 Search
+
+        </button>
+
+    </form>
+
+</div>
 
     </section>
 
@@ -64,109 +80,30 @@
 
         <h2 class="title">Popular Foods</h2>
 
-        <div class="cards">
+           <div class="cards">
 
-            <div class="card">
+{% for food in foods %}
 
-                <img src="{{ url_for('static', filename='images/burger.jpg') }}">
+<div class="card">
 
-                <h3>Burger</h3>
+    <img src="{{ url_for('static', filename='images/' + food.image) }}">
 
-                <p>₹120</p>
-                <a href="/add_to_cart/7">
-                    <button>Add to Cart</button>
-                </a>
+    <h3>{{ food.food_name }}</h3>
 
-                
+    <p>₹{{ food.price }}</p>
 
-            </div>
+    <a href="/add_to_cart/{{ food.id }}">
+        <button>Add to Cart</button>
+    </a>
 
-            <div class="card">
+</div>
 
-                <img src="{{ url_for('static', filename='images/pizza.jpg') }}">
+{% endfor %}
 
-                <h3>Pizza</h3>
-
-                <p>₹250</p>
-                <a href="/add_to_cart/2">
-                    <button>Add to Cart</button>
-                </a>
-
-                
-
-            </div>
-
-            <div class="card">
-
-                <img src="{{ url_for('static', filename='images/biryani.jpg') }}">
-
-                <h3>Chicken Biryani</h3>
-
-                <p>₹180</p>
-                <a href="/add_to_cart/3">
-                    <button>Add to Cart</button>
-                </a>
-
-                
-
-            </div>
-             <div class="card">
-
-                <img src="{{ url_for('static', filename='images/fries.jpg') }}">
-
-                <h3> french fries</h3>
-
-                <p>₹180</p>
-                <a href="/add_to_cart/10">
-                    <button>Add to Cart</button>
-                </a>
-
-
-            </div>
-             <div class="card">
-
-                <img src="{{ url_for('static', filename='images/pasta.jpg') }}">
-
-                <h3>pasta</h3>
-
-                <p>₹180</p>
-                <a href="/add_to_cart/12">
-                    <button>Add to Cart</button>
-                </a>
-
-            </div>
-             <div class="card">
-
-                <img src="{{ url_for('static', filename='images/sandwich.jpg') }}">
-
-                <h3>Sandwich</h3>
-
-                <p>₹180</p>
-
-                <a href="/add_to_cart/4">
-                    <button>Add to Cart</button>
-                </a>
-
-            </div>
-            <div class="card">
-
-                <img src="{{ url_for('static', filename='images/chickenroll.jpg') }}">
-
-                <h3>Chicken Roll</h3>
-
-                <p>₹180</p>
-
-                <a href="/add_to_cart/6">
-                    <button>Add to Cart</button>
-                </a>
-
-            </div>
 
         </div>
 
     </section>
-
-    </div>
 
     <!-- Footer -->
 

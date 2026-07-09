@@ -4,15 +4,17 @@ import mysql.connector
 app = Flask(__name__)
 app.secret_key = "fooddelivery123" # Change this to a random secret key
 
+
 db = mysql.connector.connect(
-    host="127.0.0.1",
-    port="3306",
-    user="root",
-    password="subash1420",
-    database="food_delivery"
+    host="food-delivery-db.c9uaosqimkdi.eu-north-1.rds.amazonaws.com",
+    user="subash",
+    password="14202006",
+    database="food_delivery",
+    port=3306
 )
 
 cursor = db.cursor(dictionary=True)
+
 
 @app.route("/")
 def home():
@@ -107,7 +109,11 @@ def logout():
 @app.route("/add_to_cart/<int:id>")
 def add_to_cart(id):
 
-    cursor.execute("SELECT * FROM food WHERE id=%s", (id,))
+    cursor.execute(
+        "SELECT * FROM food WHERE id=%s",
+        (id,)
+    )
+
     food = cursor.fetchone()
 
     if "cart" not in session:
@@ -115,7 +121,23 @@ def add_to_cart(id):
 
     cart = session["cart"]
 
-    cart.append(food)
+    found = False
+
+    for item in cart:
+
+        if item["id"] == food["id"]:
+
+            item["quantity"] += 1
+
+            found = True
+
+            break
+
+    if not found:
+
+        food["quantity"] = 1
+
+        cart.append(food)
 
     session["cart"] = cart
 
@@ -129,7 +151,7 @@ def cart():
     total = 0
 
     for item in cart:
-        total += float(item["price"])
+       total += float(item["price"]) * item["quantity"]
 
     return render_template(
         "cart.html",
@@ -137,16 +159,14 @@ def cart():
         total=total
     )
 #remove item from cart
-@app.route("/remove/<int:index>")
-def remove(index):
+@app.route("/remove/<int:id>")
+def remove(id):
 
     cart = session.get("cart", [])
 
-    if index < len(cart):
+    cart = [item for item in cart if item["id"] != id]
 
-        cart.pop(index)
-
-        session["cart"] = cart
+    session["cart"] = cart
 
     return redirect("/cart")
 #clear cart route
@@ -157,6 +177,8 @@ def clear_cart():
 #chekout route
 @app.route("/checkout", methods=["GET", "POST"])
 def checkout():
+    if "user_id" not in session:
+        return redirect("/login")
 
     if request.method == "POST":
 
@@ -173,21 +195,24 @@ def checkout():
         for item in cart:
             total += float(item["price"])
 
-        cursor.execute(
-            """
+        cursor.execute("""
             INSERT INTO orders
             (user_id, customer_name, phone, address, total_amount)
-
-            VALUES(%s,%s,%s,%s,%s)
+            VALUES (%s, %s, %s, %s, %s)
             """,
-            (user_id, customer_name, phone, address, total)
-        )
+            (
+                session["user_id"],
+                customer_name,
+                phone,
+                address,
+                total
+            ))
 
         db.commit()
 
         session.pop("cart", None)
 
-        return "🎉 Order Placed Successfully!"
+        return redirect("/order_success")
 
     return render_template("checkout.html")
 #admin route
@@ -337,6 +362,50 @@ def search():
     foods = cursor.fetchall()
 
     return render_template("index.html", foods=foods)
+#increase quantity route
+@app.route("/increase/<int:id>")
+def increase(id):
+
+    cart = session["cart"]
+
+    for item in cart:
+
+        if item["id"] == id:
+
+            item["quantity"] += 1
+
+            break
+
+    session["cart"] = cart
+
+    return redirect("/cart")
+#decrease quantity route
+@app.route("/decrease/<int:id>")
+def decrease(id):
+
+    cart = session["cart"]
+
+    for item in cart:
+
+        if item["id"] == id:
+
+            if item["quantity"] > 1:
+
+                item["quantity"] -= 1
+
+            else:
+
+                cart.remove(item)
+
+            break
+
+    session["cart"] = cart
+
+    return redirect("/cart")
+#order success route
+@app.route("/order_success")
+def order_success():
+    return render_template("order_success.html")
 
 
 if __name__ == "__main__":

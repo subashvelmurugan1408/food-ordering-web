@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Order Success</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/order_success.css') }}">
+
+</head>
+
+<body>
+
+<div class="success-box">
+
+    <div class="tick">
+
+        ✔
+
+    </div>
+
+    <h1>Order Placed Successfully!</h1>
+
+    <p>
+
+        Thank you for your order.
+
+        Your delicious food is being prepared.
+
+    </p>
+
+    <h3>Estimated Delivery</h3>
+
+    <h2>25 - 30 Minutes</h2>
+
+    <a href="/">
+
+        <button>
+
+            Continue Shopping
+
+        </button>
+
+    </a>
+
+</div>
+<style>
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+
+    background:linear-gradient(135deg,#ff6b35,#ff914d);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    height:100vh;
+
+}
+
+.success-box{
+
+    width:500px;
+
+    background:white;
+
+    text-align:center;
+
+    padding:50px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+
+}
+
+.tick{
+
+    width:100px;
+
+    height:100px;
+
+    background:#28a745;
+
+    color:white;
+
+    font-size:60px;
+
+    border-radius:50%;
+
+    margin:auto;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.success-box h1{
+
+    margin-top:25px;
+
+    color:#28a745;
+
+}
+
+.success-box p{
+
+    margin:20px 0;
+
+    color:#666;
+
+    font-size:18px;
+
+}
+
+.success-box h2{
+
+    color:#ff4d00;
+
+    margin:15px 0;
+
+}
+
+button{
+
+    margin-top:30px;
+
+    padding:15px 40px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#ff4d00;
+
+    color:white;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#e63e00;
+
+    transform:scale(1.05);
+
+}
+</style>
+
+</body>
+
+</html>

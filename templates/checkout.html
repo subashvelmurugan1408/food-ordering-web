@@ -6,33 +6,128 @@
 
 <body>
 
+<div class="checkout-container">
+
 <h1>Checkout</h1>
 
-<form action="/checkout" method="POST">
+<form method="POST">
 
-    <input type="text"
-           name="customer_name"
-           placeholder="Customer Name"
-           required><br><br>
+<input
+type="text"
+name="customer_name"
+placeholder="Customer Name"
+required>
 
-    <input type="text"
-           name="phone"
-           placeholder="Phone Number"
-           required><br><br>
+<input
+type="text"
+name="phone"
+placeholder="Phone Number"
+required>
 
-    <textarea
-        name="address"
-        placeholder="Delivery Address"
-        required>
-    </textarea><br><br>
+<textarea
+name="address"
+placeholder="Delivery Address"
+required>
+</textarea>
 
-    <button type="submit">
+<button>
 
-        Place Order
+Place Order
 
-    </button>
+</button>
 
 </form>
 
+</div>
+<style>
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+.checkout-container{
+
+    width:45%;
+
+    margin:50px auto;
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:12px;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+
+}
+
+.checkout-container h1{
+
+    text-align:center;
+
+    color:#ff4d00;
+
+    margin-bottom:30px;
+
+}
+
+input,
+textarea{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-bottom:20px;
+
+    border:1px solid #ccc;
+
+    border-radius:8px;
+
+    font-size:17px;
+
+}
+
+textarea{
+
+    resize:none;
+
+    height:120px;
+
+}
+
+button{
+
+    width:100%;
+
+    padding:15px;
+
+    background:#ff4d00;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+}
+
+button:hover{
+
+    background:#e63e00;
+
+}
+</style>
 </body>
+
 </html>

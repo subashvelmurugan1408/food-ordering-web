@@ -7,49 +7,253 @@
 
 <body>
 
-<h1>Your Cart</h1>
+<h1>🛒 My Cart</h1>
 
-<table border="1" cellpadding="10">
-
-<tr>
-
-<th>Food</th>
-<th>Price</th>
-<th>Action</th>
-
-</tr>
+<div class="container">
 
 {% for item in cart %}
 
-<tr>
+<div class="cart-item">
 
-<td>{{ item.food_name }}</td>
+    <img src="{{ url_for('static', filename='images/' + item.image) }}">
 
-<td>₹ {{ item.price }}</td>
+    <div class="food-details">
 
-<td>
+        <h3>{{ item.food_name }}</h3>
 
-<a href="/remove/{{ loop.index0 }}">Remove</a>
+<p>
 
-</td>
+Price :
+₹{{ item.price }}
 
-</tr>
+</p>
+
+<p>
+
+Quantity :
+
+{{ item.quantity }}
+
+</p>
+
+<p>
+
+Subtotal :
+
+₹{{ item.price * item.quantity }}
+
+</p>
+    </div>
+   <div class="quantity">
+
+    <a href="/decrease/{{ item.id }}">
+        <button class="qty-btn">−</button>
+    </a>
+
+    <span class="qty-number">
+        {{ item.quantity }}
+    </span>
+
+    <a href="/increase/{{ item.id }}">
+        <button class="qty-btn">+</button>
+    </a>
+
+</div>
+
+<a href="/remove/{{ item.id }}">
+    <button class="remove-btn">Remove</button>
+</a>
+
+
+</div>
 
 {% endfor %}
 
-</table>
+<div class="summary">
 
-<h2>
+    <h2>Total Amount</h2>
 
-Total : ₹ {{ total }}
+    <p class="total">₹{{ total }}</p>
 
-</h2>
+    <a href="/checkout">
 
-<a href="/">Continue Shopping</a>
-<a href="/checkout">
-    <button>Proceed to Checkout</button>
-</a>
+        <button class="checkout-btn">
+
+            Proceed to Checkout
+
+        </button>
+
+    </a>
+
+</div>
+
+</div>
 
 </body>
+<style>
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+}
+
+.container{
+    width:80%;
+    margin:40px auto;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:30px;
+    color:#ff4d00;
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#fff;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+
+.cart-item img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.food-details{
+    flex:1;
+    margin-left:25px;
+}
+
+.food-details h2{
+    color:#333;
+    margin-bottom:10px;
+}
+
+.food-details p{
+    color:#777;
+    font-size:18px;
+}
+
+.price{
+    font-size:22px;
+    color:#ff4d00;
+    font-weight:bold;
+}
+
+.summary{
+    margin-top:30px;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+
+.summary h2{
+    margin-bottom:15px;
+}
+
+.total{
+    font-size:28px;
+    color:#ff4d00;
+}
+
+.checkout-btn{
+    width:100%;
+    padding:15px;
+    margin-top:20px;
+    border:none;
+    background:#ff4d00;
+    color:white;
+    font-size:20px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.checkout-btn:hover{
+    background:#e63e00;
+}
+
+.remove-btn{
+    background:red;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.remove-btn:hover{
+    background:#c40000;
+}
+.quantity{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+}
+
+.qty-btn{
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:50%;
+    background:#ff4d00;
+    color:#fff;
+    font-size:22px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.qty-btn:hover{
+    background:#e63e00;
+    transform:scale(1.1);
+}
+
+.qty-btn:active{
+    transform:scale(0.95);
+}
+
+.qty-number{
+    min-width:40px;
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+    color:#333;
+}
+
+.remove-btn{
+    margin-left:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:10px;
+    background:#ff3b30;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.remove-btn:hover{
+    background:#d70015;
+    transform:translateY(-2px);
+}
+</style>
 
 </html>
