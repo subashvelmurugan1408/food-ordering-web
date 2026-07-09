@@ -1,215 +1,319 @@
-# 🍔 Online Food Delivery Website
+# 🍔 FoodExpress - Online Food Ordering Website
 
-A full-stack **Online Food Delivery Website** developed using **Python Flask**, **MySQL**, **HTML**, **CSS**, and **JavaScript**. This project allows users to browse food items, register, log in, add items to a cart, place orders, and provides an admin panel to manage food items.
-
----
-
-## 🚀 Features
-
-### 👤 User Features
-
-* User Registration
-* User Login & Logout
-* Browse Food Menu
-* Add Food to Cart
-* Shopping Cart
-* Checkout
-* Place Orders
-* User Dashboard
-* View Order History
-
-### 👨‍💼 Admin Features
-
-* Admin Dashboard
-* Add Food Items
-* Edit Food Items
-* Delete Food Items
-* View Customer Orders
+A modern **Full Stack Food Ordering Website** built using **Python Flask**, **MySQL**, **AWS RDS**, and **HTML/CSS/JavaScript**. Users can browse food items, search meals, manage their cart, place orders, and view their order history through a responsive web interface.
 
 ---
 
-## 🛠️ Technologies Used
+## 🚀 Live Demo
 
-### Frontend
-
-* HTML5
-* CSS3
-* JavaScript
-
-### Backend
-
-* Python
-* Flask
-
-### Database
-
-* MySQL
-
-### Other Tools
-
-* VS Code
-* MySQL Workbench
-* Git
-* GitHub
+> **Live URL:** *(https://food-ordering-web-1.onrender.com)*
 
 ---
 
-## 📂 Project Structure
+## 📸 Screenshots
 
-```text
-FoodDelivery/
+### 🏠 Home Page
+(Add Screenshot)
+
+### 🛒 Shopping Cart
+(Add Screenshot)
+
+### 💳 Checkout
+(Add Screenshot)
+
+### 📦 User Dashboard
+(Add Screenshot)
+
+### ✅ Order Success Page
+(Add Screenshot)
+
+---
+
+# ✨ Features
+
+## 👤 User Authentication
+- User Registration
+- User Login
+- Logout
+- Session Management
+
+## 🍽 Food Menu
+- Dynamic food cards
+- Food images
+- Search functionality
+- Responsive layout
+
+## 🛒 Shopping Cart
+- Add to cart
+- Remove items
+- Increase quantity
+- Decrease quantity
+- Automatic total calculation
+
+## 💳 Checkout
+- Customer details
+- Delivery address
+- Order summary
+- Order confirmation page
+
+## 📦 Dashboard
+- View previous orders
+- Order history
+
+## ☁ Deployment
+- AWS RDS MySQL Database
+- Render Deployment
+- Environment Variables
+- Gunicorn
+
+---
+
+# 🛠 Technologies Used
+
+## Backend
+- Python
+- Flask
+
+## Frontend
+- HTML5
+- CSS3
+- JavaScript
+
+## Database
+- MySQL
+- AWS RDS
+
+## Deployment
+- Render
+- GitHub
+- Gunicorn
+
+---
+
+# 📂 Project Structure
+
+```
+food-ordering-web/
+
 │
-├── app.py
-├── requirements.txt
-├── README.md
-│
+
 ├── static/
+
 │   ├── css/
-│   │   └── style.css
-│   ├── js/
-│   │   └── script.js
-│   └── images/
-│       ├── logo.png
-│       ├── burger.jpg
-│       ├── pizza.jpg
-│       ├── biryani.jpg
-│       ├── fries.jpg
-│       ├── pasta.jpg
-│       └── sandwich.jpg
+
+│   │      style.css
+
+│   │      cart.css
+
+│   │      checkout.css
+
+│   │      order_success.css
+
+│   │
+
+│   ├── images/
+
+│   └── js/
+
 │
-└── templates/
-    ├── index.html
-    ├── register.html
-    ├── login.html
-    ├── cart.html
-    ├── checkout.html
-    ├── dashboard.html
-    ├── admin.html
-    ├── add_food.html
-    ├── edit_food.html
-    └── orders.html
+
+├── templates/
+
+│      index.html
+
+│      login.html
+
+│      register.html
+
+│      cart.html
+
+│      checkout.html
+
+│      dashboard.html
+
+│      order_success.html
+
+│
+
+├── app.py
+
+├── requirements.txt
+
+├── README.md
+
+└── .gitignore
 ```
 
 ---
 
-## ⚙️ Installation
+# 🗄 Database
 
-### Clone the Repository
+## Users
 
-```bash
-git clone https://github.com/YOUR_USERNAME/online-food-delivery.git
+```
+id
+fullname
+email
+phone
+password
 ```
 
-### Move into the Project
+## Food
 
-```bash
-cd online-food-delivery
+```
+id
+food_name
+price
+image
 ```
 
-### Install Dependencies
+## Orders
+
+```
+id
+user_id
+customer_name
+phone
+address
+total_amount
+order_date
+```
+
+---
+
+# ⚙ Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/subashvelmurugan1408/food-ordering-web.git
+```
+
+Go to the project folder
+
+```bash
+cd food-ordering-web
+```
+
+Create Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+Activate Virtual Environment
+
+Windows
+
+```bash
+venv\Scripts\activate
+```
+
+Linux / Mac
+
+```bash
+source venv/bin/activate
+```
+
+Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Configure MySQL
-
-Create a database named:
-
-```sql
-CREATE DATABASE food_delivery;
-```
-
-Import the required tables into the database.
-
-### Update Database Credentials
-
-Edit `app.py`:
-
-```python
-db = mysql.connector.connect(
-    host="127.0.0.1",
-    user="root",
-    password="YOUR_PASSWORD",
-    database="food_delivery"
-)
-```
-
-### Run the Project
+Run the Flask App
 
 ```bash
 python app.py
 ```
 
-Open your browser:
+---
 
+# 🌐 Environment Variables
+
+Create the following environment variables (or configure them in Render):
+
+```env
+DB_HOST=your_rds_endpoint
+DB_USER=your_username
+DB_PASSWORD=your_password
+DB_NAME=your_database_name
+DB_PORT=3306
+SECRET_KEY=your_secret_key
 ```
-http://127.0.0.1:5000
-```
 
 ---
 
-## 🗄️ Database Tables
+# 🚀 Deployment
 
-* users
-* food
-* orders
+This project is deployed using:
 
----
+- Render
+- AWS RDS MySQL
 
-## 📸 Screens
+Deployment Steps
 
-* Home Page
-* Registration Page
-* Login Page
-* Food Menu
-* Shopping Cart
-* Checkout
-* User Dashboard
-* Admin Dashboard
-* Orders Page
+1. Push code to GitHub
+2. Create a Render Web Service
+3. Connect GitHub Repository
+4. Add Environment Variables
+5. Deploy
 
 ---
 
-## 📌 Future Enhancements
+# 📚 What I Learned
 
-* Secure password hashing
-* Food search
-* Food categories
-* Image upload from admin panel
-* Quantity update in cart
-* Payment gateway integration
-* Email notifications
-* Responsive mobile design
-* Admin authentication
-* Cloud deployment
-
----
-
-## 📚 Learning Outcomes
-
-This project helped in understanding:
-
-* Flask Routing
-* HTML Forms
-* CRUD Operations
-* MySQL Integration
-* User Authentication
-* Session Management
-* Shopping Cart Logic
-* Order Processing
-* Admin Panel Development
-* Full-Stack Web Development
+- Flask Web Development
+- Authentication & Sessions
+- MySQL Database Integration
+- AWS RDS Configuration
+- Cloud Deployment using Render
+- Environment Variables
+- Git & GitHub Workflow
+- Responsive Web Design
+- Debugging Deployment Errors
+- Shopping Cart Logic
 
 ---
 
-## 👨‍💻 Author
+# 🔮 Future Improvements
+
+- Admin Panel
+- Food Categories
+- Payment Gateway Integration
+- Order Tracking
+- Food Ratings & Reviews
+- Coupon System
+- Email Notifications
+- Image Upload for Admin
+- Online Payments (Stripe/Razorpay)
+
+---
+
+# 👨‍💻 Author
 
 **Subash V**
 
-* B.E. Computer Science and Engineering
-* RVS Technical Campus, Coimbatore
+🎓 B.E Computer Science and Engineering
+
+📍 Tamil Nadu, India
+
+### GitHub
+
+https://github.com/subashvelmurugan1408
+
+### LinkedIn
+
+(Add your LinkedIn URL)
 
 ---
 
-## ⭐ If you found this project useful, consider giving it a star on GitHub!
+# ⭐ If you like this project
+
+Give this repository a ⭐ on GitHub.
+
+---
+
+## 📄 License
+
+This project is developed for educational and portfolio purposes.
