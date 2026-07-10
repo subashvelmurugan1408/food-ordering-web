@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Delivery</title>
+    <title>FoodExpress</title>
 
     <link rel="stylesheet"
         href="{{ url_for('static', filename='style.css') }}">
@@ -12,6 +12,7 @@
 </head>
 
 <body>
+    <body data-searched="{{ searched|default(false)|lower }}"></body>
 
     <!-- Header -->
     <header>
@@ -25,8 +26,6 @@
 
     <a href="/">Home</a>
     <a href="/cart">Cart</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
 
     {% if session.get("user_name") %}
 
@@ -76,7 +75,7 @@
 
     <!-- Featured Foods -->
 
-    <section>
+    <section id="menu">
 
         <h2 class="title">Popular Foods</h2>
 
@@ -112,7 +111,33 @@
         <p>© 2026 FoodExpress. All Rights Reserved.</p>
 
     </footer>
+   <script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const searched = document.body.dataset.searched;
+
+    if (searched === "true") {
+
+        const menu = document.getElementById("menu");
+
+        if (menu) {
+
+            menu.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+    }
+
+});
+
+</script>
+
 
 </body>
+
 
 </html>

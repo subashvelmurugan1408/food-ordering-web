@@ -4,8 +4,7 @@ import os
 
 
 app = Flask(__name__)
-app.secret_key = os.environ.get("SECRET_KEY")# Change this to a random secret key
-
+app.secret_key = os.getenv("SECRET_KEY")  # Change this to a random secret key
 
 db = mysql.connector.connect(
     host=os.getenv("DB_HOST"),
@@ -18,10 +17,11 @@ db = mysql.connector.connect(
 cursor = db.cursor(dictionary=True)
 
 
+
 @app.route("/")
 def home():
 
-    cursor.execute("SELECT * FROM food")
+    cursor.execute("SELECT * FROM food LIMIT 8")
 
     foods = cursor.fetchall()
     print(foods)  
@@ -346,9 +346,14 @@ def dashboard():
 
     orders = cursor.fetchall()
 
+    total_spent = sum(float(order["total_amount"]) for order in orders)
+
     return render_template(
         "dashboard.html",
-        orders=orders
+        orders=orders,
+        total_spent=total_spent,
+        pending_orders=0,
+        delivered_orders=0
     )
 #search route
 @app.route("/search")
@@ -363,7 +368,7 @@ def search():
 
     foods = cursor.fetchall()
 
-    return render_template("index.html", foods=foods)
+    return render_template("index.html", foods=foods,searched=True)
 #increase quantity route
 @app.route("/increase/<int:id>")
 def increase(id):

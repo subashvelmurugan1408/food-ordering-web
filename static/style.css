@@ -320,7 +320,40 @@ nav{
 }
 
 }
-/*cart style*/
+@media (max-width: 768px) {
 
+    .cards {
+        grid-template-columns: 1fr;
+    }
 
-/*checkout style*/
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .hero {
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero-search form {
+        width: 100%;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .checkout-container {
+        flex-direction: column;
+    }
+
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+}
