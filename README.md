@@ -312,7 +312,7 @@ https://github.com/subashvelmurugan1408
 
 ### LinkedIn
 
-(Add your LinkedIn URL)
+(www.linkedin.com/in/subash-v-1557a832b)
 
 ---
 
