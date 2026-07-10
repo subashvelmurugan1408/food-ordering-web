@@ -26,6 +26,9 @@ A modern **Full Stack Food Ordering Website** built using **Python Flask**, **My
 <img width="1893" height="835" alt="Screenshot 2026-07-09 231140" src="https://github.com/user-attachments/assets/fd767d41-6c34-4a83-be3c-3d48e1b3c91c" />
 
 (Add Screenshot)
+### 📦 User Dashboard
+<img width="1902" height="846" alt="image" src="https://github.com/user-attachments/assets/2cdd0c20-fe1e-42ee-ab77-3169fcf42f12" />
+
 
 ### ✅ Order Success Page
 <img width="1901" height="842" alt="Screenshot 2026-07-09 231222" src="https://github.com/user-attachments/assets/fcb014fb-ff84-4527-8ea2-ff401bc02942" />
