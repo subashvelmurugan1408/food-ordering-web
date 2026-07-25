@@ -140,7 +140,7 @@ def api_login():
         "success": False,
         "message": "Invalid Email or Password"
     }), 401
-    @app.route("/api/place_order", methods=["POST"])
+@app.route("/api/place_order", methods=["POST"])
 def api_place_order():
 
     data = request.get_json()
