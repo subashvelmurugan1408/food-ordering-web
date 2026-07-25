@@ -143,8 +143,9 @@ def api_login():
 @app.route("/api/place_order", methods=["POST"])
 def api_place_order():
 
-    data = request.get_json()
+    data = request.get_json()    
 
+    user_id = data["user_id"]
     customer_name = data["customer_name"]
     phone = data["phone"]
     address = data["address"]
@@ -153,9 +154,10 @@ def api_place_order():
 
     cursor.execute("""
         INSERT INTO orders
-        (customer_name, phone, address, payment_method, total_amount)
+        (user_id,customer_name, phone, address, payment_method, total_amount)
         VALUES (%s, %s, %s, %s, %s)
     """, (
+        user_id,
         customer_name,
         phone,
         address,
