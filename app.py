@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request ,redirect, url_for, session
+from flask import Flask, render_template, request ,redirect, url_for, session,jsonify
 import mysql.connector
 import os
+from flask_cors import CORS
 
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY")  # Change this to a random secret key
+CORS(app)
+
 
 db = mysql.connector.connect(
     host=os.getenv("DB_HOST"),
@@ -18,6 +21,7 @@ cursor = db.cursor(dictionary=True)
 
 
 
+
 @app.route("/")
 def home():
 
@@ -28,6 +32,14 @@ def home():
 
     return render_template("index.html", foods=foods)
 @app.route("/register",methods=["GET","POST"])
+@app.route("/api/foods", methods=["GET"])
+def api_foods():
+
+    cursor.execute("SELECT * FROM food")
+
+    foods = cursor.fetchall()
+
+    return jsonify(foods)
 
 def register():
 
@@ -99,6 +111,35 @@ def login():
             return "Invalid Email or Password"
 
     return render_template("login.html")
+@app.route("/api/login", methods=["POST"])
+def api_login():
+
+    data = request.get_json()
+
+    email = data["email"]
+    password = data["password"]
+
+    cursor.execute(
+        "SELECT * FROM users WHERE email=%s AND password=%s",
+        (email, password)
+    )
+
+    user = cursor.fetchone()
+
+    if user:
+
+        return jsonify({
+            "success": True,
+            "user": {
+                "id": user["id"],
+                "fullname": user["fullname"],
+                "email": user["email"]
+            }
+        })
+    return jsonify({
+        "success": False,
+        "message": "Invalid Email or Password"
+    }), 401
 #logout
 @app.route("/logout")
 def logout():
