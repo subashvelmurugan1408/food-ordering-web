@@ -140,6 +140,35 @@ def api_login():
         "success": False,
         "message": "Invalid Email or Password"
     }), 401
+    @app.route("/api/place_order", methods=["POST"])
+def api_place_order():
+
+    data = request.get_json()
+
+    customer_name = data["customer_name"]
+    phone = data["phone"]
+    address = data["address"]
+    payment_method = data["payment_method"]
+    total_amount = data["total_amount"]
+
+    cursor.execute("""
+        INSERT INTO orders
+        (customer_name, phone, address, payment_method, total_amount)
+        VALUES (%s, %s, %s, %s, %s)
+    """, (
+        customer_name,
+        phone,
+        address,
+        payment_method,
+        total_amount
+    ))
+
+    db.commit()
+
+    return jsonify({
+        "success": True,
+        "message": "Order placed successfully"
+    })
 #logout
 @app.route("/logout")
 def logout():
