@@ -142,35 +142,69 @@ def api_login():
     }), 401
 @app.route("/api/place_order", methods=["POST"])
 def api_place_order():
+    try:
 
-    data = request.get_json()    
+        data = request.get_json()
 
-    user_id = data["user_id"]
-    customer_name = data["customer_name"]
-    phone = data["phone"]
-    address = data["address"]
-    payment_method = data["payment_method"]
-    total_amount = data["total_amount"]
+        user_id = data["user_id"]
+        customer_name = data["customer_name"]
+        phone = data["phone"]
+        address = data["address"]
+        payment_method = data["payment_method"]
+        total_amount = data["total_amount"]
+        items = data["items"]
 
-    cursor.execute("""
-        INSERT INTO orders
-        (user_id,customer_name, phone, address, payment_method, total_amount)
-        VALUES (%s, %s, %s, %s, %s)
-    """, (
-        user_id,
-        customer_name,
-        phone,
-        address,
-        payment_method,
-        total_amount
-    ))
+        # Insert into orders table
+        cursor.execute("""
+            INSERT INTO orders
+            (user_id, customer_name, phone, address,
+             payment_method, total_amount)
+            VALUES (%s,%s,%s,%s,%s,%s)
+        """, (
+            user_id,
+            customer_name,
+            phone,
+            address,
+            payment_method,
+            total_amount
+        ))
 
-    db.commit()
+        db.commit()
 
-    return jsonify({
-        "success": True,
-        "message": "Order placed successfully"
-    })
+        # Get newly created order id
+        order_id = cursor.lastrowid
+
+        # Insert each ordered food
+        for item in items:
+
+            cursor.execute("""
+                INSERT INTO order_items
+                (order_id, food_id, food_name, quantity, price)
+                VALUES (%s,%s,%s,%s,%s)
+            """, (
+                order_id,
+                item["food_id"],
+                item["food_name"],
+                item["quantity"],
+                item["price"]
+            ))
+
+        db.commit()
+
+        return jsonify({
+            "success": True,
+            "message": "Order placed successfully",
+            "order_id": order_id
+        })
+
+    except Exception as e:
+
+        db.rollback()
+
+        return jsonify({
+            "success": False,
+            "message": str(e)
+        }), 500
 #logout
 @app.route("/logout")
 def logout():
