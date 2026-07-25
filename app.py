@@ -143,23 +143,22 @@ def api_login():
 @app.route("/api/place_order", methods=["POST"])
 def api_place_order():
     try:
-
         data = request.get_json()
 
-        user_id = data["user_id"]
-        customer_name = data["customer_name"]
-        phone = data["phone"]
-        address = data["address"]
-        payment_method = data["payment_method"]
-        total_amount = data["total_amount"]
-        items = data["items"]
+        print("Received Data:", data)
 
-        # Insert into orders table
+        user_id = data.get("user_id")
+        customer_name = data.get("customer_name")
+        phone = data.get("phone")
+        address = data.get("address")
+        payment_method = data.get("payment_method")
+        total_amount = data.get("total_amount")
+        items = data.get("items", [])
+
         cursor.execute("""
             INSERT INTO orders
-            (user_id, customer_name, phone, address,
-             payment_method, total_amount)
-            VALUES (%s,%s,%s,%s,%s,%s)
+            (user_id, customer_name, phone, address, payment_method, total_amount)
+            VALUES (%s, %s, %s, %s, %s, %s)
         """, (
             user_id,
             customer_name,
@@ -169,18 +168,13 @@ def api_place_order():
             total_amount
         ))
 
-        db.commit()
-
-        # Get newly created order id
         order_id = cursor.lastrowid
 
-        # Insert each ordered food
         for item in items:
-
             cursor.execute("""
                 INSERT INTO order_items
                 (order_id, food_id, food_name, quantity, price)
-                VALUES (%s,%s,%s,%s,%s)
+                VALUES (%s, %s, %s, %s, %s)
             """, (
                 order_id,
                 item["food_id"],
@@ -193,17 +187,17 @@ def api_place_order():
 
         return jsonify({
             "success": True,
-            "message": "Order placed successfully",
-            "order_id": order_id
+            "message": "Order placed successfully"
         })
 
     except Exception as e:
-
         db.rollback()
+
+        print("ERROR:", e)
 
         return jsonify({
             "success": False,
-            "message": str(e)
+            "error": str(e)
         }), 500
 #logout
 @app.route("/logout")
